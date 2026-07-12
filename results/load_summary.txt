@@ -1,0 +1,9 @@
+2024 Waste Data Interrogator - load summary
+============================================
+total movement rows : 489,453
+  received rows      : 352,275
+  removed rows       : 137,178
+columns              : 27
+unique facilities    : 6,860  (by permit)
+unique waste codes   : 765
+total tonnes (raw)   : 358,273,138

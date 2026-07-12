@@ -1,0 +1,9 @@
+Waste Flow Network - summary
+============================
+nodes                     : 7,284
+  facilities              : 6,860
+  places (origins/dests)  : 424
+edges (directed)          : 115,913
+average degree            : 31.83
+largest connected comp.   : 7,284 nodes (100.0%)
+total flow (edge weight)  : 358,273,157 tonnes
