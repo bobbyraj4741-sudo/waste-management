@@ -79,7 +79,7 @@ Runtime is a few minutes end-to-end on a laptop.
 | 2 Load & organise | `src/s01_load.py` | `docs/data_dictionary.md`, `results/load_summary.txt` |
 | 3 Clean & standardise | `src/s02_clean.py` | `results/data_quality_report.md` |
 | 4 Indicators & EDA | `src/s03_indicators.py` | `results/top_facilities.md`, `figures/eda_*.png` |
-| 5 Build graph | `src/s04_graph.py` | `data/processed/waste_flow_graph.graphml`, `results/graph_summary.txt` |
+| 5 Build graph | `src/s04_graph.py` | `data/processed/waste_flow_graph.graphml.gz`, `results/graph_summary.txt` |
 | 6 Network analysis | `src/s04_graph.py` | `results/top20_centrality.md`, `figures/net_*.png` |
 | 7 Clustering | `src/s05_ml.py` | `results/cluster_profiles.md`, `figures/ml_01_*.png` |
 | 8 Graph AI anomaly detection | `src/s05_ml.py` | `results/anomalies_ranked.{csv,md}`, `figures/ml_02_*.png` |
