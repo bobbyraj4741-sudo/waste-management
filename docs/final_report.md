@@ -35,7 +35,7 @@ counterparty permit, so facility-to-facility links are not observable
 |---|---|---|
 | Clean | drop no-permit / no-tonnage rows, standardise categoricals, derive recovery/disposal/transfer flags from `fate` + R/D codes | `data/processed/movements_clean.parquet` |
 | Indicators | per-facility received/removed tonnage, waste diversity (Shannon entropy), recovery/disposal/transfer/hazardous fractions | `facility_indicators.parquet` |
-| Graph | directed weighted graph: place -> facility (received), facility -> place (removed); edge weight = tonnes | `waste_flow_graph.graphml` |
+| Graph | directed weighted graph: place -> facility (received), facility -> place (removed); edge weight = tonnes | `waste_flow_graph.graphml.gz` |
 | Network analysis | in/out degree, weighted degree, tonnage-weighted betweenness, Louvain communities | `top20_centrality.md` |
 | Clustering | KMeans (k=6) on scaled behaviour features | `cluster_profiles.md` |
 | Graph AI | Isolation Forest on features **+** DeepWalk-as-matrix-factorisation node embeddings (random walk -> PPMI -> Truncated SVD) with a second Isolation Forest; scores combined | `anomalies_ranked.csv` |

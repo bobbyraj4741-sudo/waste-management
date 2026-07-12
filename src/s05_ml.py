@@ -223,7 +223,7 @@ def plots(fac: pd.DataFrame, Xs: np.ndarray, names: dict[int, str]) -> None:
 def main() -> None:
     print("Modules 7 & 8: clustering + graph anomaly detection ...")
     ind = pd.read_parquet(C.DATA_PROCESSED / "facility_indicators.parquet")
-    G = nx.read_graphml(C.DATA_PROCESSED / "waste_flow_graph.graphml")
+    G = nx.read_graphml(C.DATA_PROCESSED / "waste_flow_graph.graphml.gz")
 
     fac, Xs = build_feature_matrix(ind)
     fac = cluster_facilities(fac, Xs)

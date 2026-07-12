@@ -15,7 +15,9 @@ Edges are aggregated by (source, target): weight = total tonnes, plus attributes
 for dominant waste category, dominant fate, and number of distinct waste codes.
 
 Outputs:
-  * data/processed/waste_flow_graph.graphml
+  * data/processed/waste_flow_graph.graphml.gz   (gzip-compressed GraphML;
+      networkx reads it transparently via read_graphml. ~1.6 MB vs ~31 MB raw,
+      so it stays well under GitHub's upload limits.)
   * results/graph_summary.txt
   * results/top20_centrality.md          (Module 6 completion check)
   * data/processed/facility_network_metrics.parquet
@@ -138,11 +140,17 @@ def network_metrics(G: nx.DiGraph) -> pd.DataFrame:
 
 
 def _sanitize_for_graphml(G: nx.DiGraph) -> None:
-    """GraphML cannot serialise pandas NA/None; coerce to safe scalar types."""
+    """GraphML cannot serialise pandas NA/None; coerce to safe scalar types.
+
+    Also rounds floats to 4 dp: full binary precision (e.g. 0.9367264191207854)
+    bloats the XML with no analytical value at this scale.
+    """
     def fix(d):
         for k, v in list(d.items()):
             if v is None or (isinstance(v, float) and pd.isna(v)) or v is pd.NA:
                 d[k] = "" if isinstance(v, str) or v is pd.NA else 0.0
+            elif isinstance(v, float) and not isinstance(v, bool):
+                d[k] = round(v, 4)
             elif not isinstance(v, (str, int, float, bool)):
                 d[k] = str(v)
     for _, d in G.nodes(data=True):
@@ -218,7 +226,8 @@ def main() -> None:
 
     G = build_graph(df, ind)
     _sanitize_for_graphml(G)
-    nx.write_graphml(G, C.DATA_PROCESSED / "waste_flow_graph.graphml")
+    # .gz suffix -> networkx gzip-compresses on write and decompresses on read.
+    nx.write_graphml(G, C.DATA_PROCESSED / "waste_flow_graph.graphml.gz")
     summary = summarise(G)
     (C.RESULTS / "graph_summary.txt").write_text(summary)
     print(summary)
